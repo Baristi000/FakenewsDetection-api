@@ -90,12 +90,12 @@ def create_model():
 
 
 def load_weight(model):
-    l = torch.load(f=settings.retrain_dir)
+    l = torch.load(f=settings.ckpt_load_dir)
     return model.load_state_dict(l['state_dict'])
 
 
 def save_weight(model):
-    torch.save(model.state_dict(), settings.retrain_dir)
+    settings.trainer.save_checkpoint(settings.ckpt_save_dir)
 
 
 def predict(model, text: str):
@@ -107,23 +107,10 @@ def predict(model, text: str):
 
 
 def init_trainer():
-    trainer = None
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        torch.manual_seed(42)
-        trainer = pl.Trainer(
-            gpus=[0],
-            max_epochs=settings.ai_config["epochs"],
-            precision=settings.ai_config["precision"]
-        )
-        print("\tCuda core is available")
-    else:
-        device = torch.device("cpu")
-        torch.manual_seed(42)
-        trainer = pl.Trainer(
-            max_epochs=settings.ai_config["epochs"],
-            precision=settings.ai_config["precision"]
-        )
-        print("\tCuda core is unavailable, use cpu instead")
-
-    return trainer
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    torch.manual_seed(42)
+    return pl.Trainer(
+        gpus=([0] if torch.cuda.is_available() else None),
+        max_epochs=settings.ai_config["epochs"],
+        precision=settings.ai_config["precision"]
+    )

@@ -5,7 +5,11 @@ from ai_services.data_services import FakeNewsDataModule, tokenizer_data
 
 def setup_ai_services():
     settings.trainer = init_trainer()
-    settings.mode = load_weight(create_model())
+    if settings.ckpt_load_dir == "":
+        settings.mode = create_model()
+    else:
+        settings.mode = load_weight(create_model())
+    
 
 
 def train(data_list):

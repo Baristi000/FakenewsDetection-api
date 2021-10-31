@@ -13,8 +13,8 @@ class Setting:
     threshold = 0.8
     trainer = None
     model = None
-    retrain_dir = "ai_services/checkpoints/epoch_1.ckpt"
-    init_model_dir = "ai_services/checkpoints/epoch_1.ckpt"
+    ckpt_save_dir = ""
+    ckpt_load_dir = "ai_services/checkpoints/epoch_1.ckpt"
     host = "0.0.0.0"
     port = 8001
 
