@@ -9,3 +9,5 @@ __pycache__/**
 *.ipynb
 test.py
 test1.py
+
+lightning_logs

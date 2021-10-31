@@ -1,4 +1,3 @@
-wandb 
 transformers==3.4.0 
 pytorch_lightning==1.4.0
 fastapi

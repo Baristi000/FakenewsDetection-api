@@ -3,7 +3,7 @@ class Setting:
         "model_name": "roberta-base",
         "num_classes": 1,
         "max_len": 128,
-        "batch_size": 32,
+        "batch_size": 2,
         "num_workers": 8,
         "average": "macro",
         "lr": 2e-5,
@@ -13,8 +13,8 @@ class Setting:
     threshold = 0.8
     trainer = None
     model = None
-    ckpt_save_dir = ""
-    ckpt_load_dir = "ai_services/checkpoints/epoch_1.ckpt"
+    ckpt_save_dir = "ai_services/checkpoints/epoch_1.ckpt"
+    ckpt_load_dir = ""
     host = "0.0.0.0"
     port = 8001
 
