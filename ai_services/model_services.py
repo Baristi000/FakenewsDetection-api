@@ -94,7 +94,7 @@ def load_weight(model):
     return model.load_state_dict(l['state_dict'])
 
 
-def save_weight(model):
+def save_weight():
     settings.trainer.save_checkpoint(settings.ckpt_save_dir)
 
 
