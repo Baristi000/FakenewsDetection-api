@@ -16,7 +16,7 @@ def train(data_list):
         model=settings.model,
         datamodule=FakeNewsDataModule(settings.ai_config, data_list)
     )
-    save_weight(settings.model)
+    save_weight()
     return {"message": "train succeed"}
 
 
