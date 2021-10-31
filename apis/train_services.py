@@ -9,12 +9,11 @@ def setup_ai_services():
         settings.mode = create_model()
     else:
         settings.mode = load_weight(create_model())
-    
 
 
 def train(data_list):
     processed_data = FakeNewsDataModule(settings.ai_config, data_list)
-    settings.trainer(
+    settings.trainer.fit(
         model=settings.model,
         datamodule=processed_data
     )
