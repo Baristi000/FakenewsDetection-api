@@ -12,9 +12,11 @@ def setup_ai_services():
 
 
 def train(data_list):
+    data = FakeNewsDataModule(settings.ai_config, data_list)
+    print(dir(data))
     settings.trainer.fit(
         model=settings.model,
-        datamodule=FakeNewsDataModule(settings.ai_config, data_list)
+        datamodule=data
     )
     save_weight()
     return {"message": "train succeed"}
