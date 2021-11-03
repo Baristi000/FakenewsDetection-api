@@ -1,9 +1,12 @@
+import os
+
 from config import settings
 from ai_services.model_services import init_trainer, create_model, load_weight, save_weight, predict
 from ai_services.data_services import FakeNewsDataModule, tokenizer_data
 
 
 def setup_ai_services():
+    settings.ckpt_load_dir = settings.get_retrain_model_dir()
     settings.trainer = init_trainer()
     if settings.ckpt_load_dir == "":
         settings.model = create_model()

@@ -111,6 +111,7 @@ def init_trainer():
     torch.manual_seed(42)
     return pl.Trainer(
         logger=None,
+        checkpoint_callback=False,
         gpus=([0] if torch.cuda.is_available() else None),
         max_epochs=settings.ai_config["epochs"],
         precision=settings.ai_config["precision"]

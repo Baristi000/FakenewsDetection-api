@@ -5,3 +5,4 @@ uvicorn==0.15.0
 scikit-learn==1.0.1
 nest_asyncio==1.5.1
 pyngrok==5.1.0
+setuptools==58.4.0

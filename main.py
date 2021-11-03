@@ -28,4 +28,4 @@ if __name__ == "__main__":
     ngrok_tunnel = ngrok.connect(settings.port)
     print('Public URL:', ngrok_tunnel.public_url)
     nest_asyncio.apply()
-    uvicorn.run("main:app", host=settings.host, port=settings.port)
+    uvicorn.run(app, host=settings.host, port=settings.port)
