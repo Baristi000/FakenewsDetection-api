@@ -1,3 +1,6 @@
+import os
+
+
 class Setting:
     ai_config = {
         "model_name": "roberta-base",
@@ -13,8 +16,13 @@ class Setting:
     threshold = 0.8
     trainer = None
     model = None
-    ckpt_save_dir = "ai_services/checkpoints/epoch_1.ckpt"
-    ckpt_load_dir = ""
+    ckpt_save_dir = "ai_services/checkpoints/current.ckpt"
+    ckpt_load_dir = (
+        ("ai_services/checkpoints/epoch_1.ckpt",
+         print("\tExisted initialized model"))
+        if os.path.isfile("ai_services/checkpoints/epoch_1.ckpt") else
+        ("", print("\tNo initialized model"))
+    )[0]
     host = "0.0.0.0"
     port = 8001
 

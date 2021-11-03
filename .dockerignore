@@ -1,0 +1,16 @@
+env
+__pycache__/**
+**/__pycache__/
+
+.DS_Store
+.vscode
+
+.ipynb_checkpoints
+*.ipynb
+test.py
+test1.py
+
+lightning_logs
+ai_services/checkpoints
+
+README.md

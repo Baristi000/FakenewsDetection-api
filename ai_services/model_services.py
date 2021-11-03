@@ -110,6 +110,7 @@ def init_trainer():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.manual_seed(42)
     return pl.Trainer(
+        logger=None,
         gpus=([0] if torch.cuda.is_available() else None),
         max_epochs=settings.ai_config["epochs"],
         precision=settings.ai_config["precision"]
