@@ -1,7 +1,7 @@
 transformers==3.4.0 
 pytorch_lightning==1.4.0
-fastapi
-uvicorn
-scikit-learn
-nest_asyncio
-pyngrok
+fastapi==0.70.0
+uvicorn==0.15.0
+scikit-learn==1.0.1
+nest_asyncio==1.5.1
+pyngrok==5.1.0
