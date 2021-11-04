@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
+import torch
 import nest_asyncio
 from pyngrok import ngrok
 
@@ -25,6 +26,7 @@ def hello_world():
 
 
 if __name__ == "__main__":
+    torch.multiprocessing.set_start_method('spawn')
     ngrok_tunnel = ngrok.connect(settings.port)
     print('Public URL:', ngrok_tunnel.public_url)
     nest_asyncio.apply()
