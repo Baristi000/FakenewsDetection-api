@@ -36,7 +36,7 @@ class Model(nn.Module):
             nn.LeakyReLU(),
             nn.Linear(in_features=256, out_features=num_classes),
             nn.Sigmoid()
-        ])
+        ]).to(settings.device)
 
     def forward(self, input_ids, attention_mask=None):
         """
