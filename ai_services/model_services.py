@@ -89,7 +89,7 @@ class LightningModel(pl.LightningModule):
         loss = F.mse_loss(logits, targets)
 
         # logits.argmax(dim=1).cpu() for non-sigmoid
-        pred_labels = logits.cpu() > 0.5
+        pred_labels = logits.cpu() > 0.8
         acc = accuracy_score(targets.cpu(), pred_labels)
         f1 = f1_score(targets.cpu(), pred_labels,
                       average=self.config['average'])
@@ -111,8 +111,8 @@ def save_weight():
 
 def predict(model, text: str):
     token = tokenizer_data(text)
-    input_ids = token['input_ids']
-    attention_mask = token['attention_mask']
+    input_ids = token['input_ids'].to(settings.device)
+    attention_mask = token['attention_mask'].to(settings.device)
     result = model(input_ids=input_ids, attention_mask=attention_mask)
     return result
 
