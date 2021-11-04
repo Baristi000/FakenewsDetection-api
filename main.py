@@ -27,7 +27,8 @@ def hello_world():
 
 if __name__ == "__main__":
     torch.multiprocessing.set_start_method('spawn')
-    ngrok_tunnel = ngrok.connect(settings.port)
+    # Disable tunnel
+    """ ngrok_tunnel = ngrok.connect(settings.port)
     print('Public URL:', ngrok_tunnel.public_url)
-    nest_asyncio.apply()
+    nest_asyncio.apply() """
     uvicorn.run(app, host=settings.host, port=settings.port)
