@@ -89,9 +89,9 @@ class LightningModel(pl.LightningModule):
         loss = F.mse_loss(logits, targets)
 
         # logits.argmax(dim=1).cpu() for non-sigmoid
-        pred_labels = logits.to(settings.device) > 0.5
-        acc = accuracy_score(targets.to(settings.device), pred_labels)
-        f1 = f1_score(targets.to(settings.device), pred_labels,
+        pred_labels = logits.cpu() > 0.5
+        acc = accuracy_score(targets.cpu(), pred_labels)
+        f1 = f1_score(targets.cpu(), pred_labels,
                       average=self.config['average'])
         return {"loss": loss, "accuracy": acc, "f1_score": f1}
 
