@@ -34,6 +34,7 @@ class Setting:
         else:
             print("Existed initialized model")
         return dir
+    device = None
 
 
 settings = Setting()

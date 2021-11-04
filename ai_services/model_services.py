@@ -28,7 +28,7 @@ class Model(nn.Module):
 
         # pretrained transformer model as base
         self.base = AutoModel.from_pretrained(
-            pretrained_model_name_or_path=model_name)
+            pretrained_model_name_or_path=model_name, torchscript=True).to(settings.device)
 
         # nn classifier on top of base model
         self.classfier = nn.Sequential(*[
@@ -60,9 +60,19 @@ class LightningModel(pl.LightningModule):
     def __init__(self, config):
 
         super(LightningModel, self).__init__()
+
+        data = tokenizer_data("hello")
+        ex_input_ids = data['input_ids'].clone(
+        ).to(settings.device).detach()
+        ex_attention_mask = data['attention_mask'].clone(
+        ).to(settings.device).detach()
+
         self.config = config
-        self.model = Model(
-            model_name=self.config['model_name'], num_classes=self.config['num_classes'])
+        self.model = torch.jit.trace(
+            Model(
+                model_name=self.config['model_name'],
+                num_classes=self.config['num_classes']),
+            [ex_input_ids, ex_attention_mask])
 
     def forward(self, input_ids, attention_mask=None):
         logits = self.model(input_ids=input_ids, attention_mask=attention_mask)
@@ -78,9 +88,10 @@ class LightningModel(pl.LightningModule):
         logits = self(input_ids=input_ids, attention_mask=attention_mask)
         loss = F.mse_loss(logits, targets)
 
-        pred_labels = logits.cpu() > 0.5  # logits.argmax(dim=1).cpu() for non-sigmoid
-        acc = accuracy_score(targets.cpu(), pred_labels)
-        f1 = f1_score(targets.cpu(), pred_labels,
+        # logits.argmax(dim=1).cpu() for non-sigmoid
+        pred_labels = logits.to(settings.device) > 0.5
+        acc = accuracy_score(targets.to(settings.device), pred_labels)
+        f1 = f1_score(targets.to(settings.device), pred_labels,
                       average=self.config['average'])
         return {"loss": loss, "accuracy": acc, "f1_score": f1}
 
@@ -107,7 +118,8 @@ def predict(model, text: str):
 
 
 def init_trainer():
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    settings.device = torch.device(
+        "cuda" if torch.cuda.is_available() else "cpu")
     torch.manual_seed(42)
     return pl.Trainer(
         logger=None,

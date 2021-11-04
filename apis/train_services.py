@@ -1,5 +1,3 @@
-import os
-
 from config import settings
 from ai_services.model_services import init_trainer, create_model, load_weight, save_weight, predict
 from ai_services.data_services import FakeNewsDataModule, tokenizer_data
@@ -19,6 +17,10 @@ def train(data_list):
         model=settings.model,
         datamodule=FakeNewsDataModule(settings.ai_config, data_list)
     )
+    return {"message": "train succeed"}
+
+
+def backup_checkpoint():
     save_weight()
     return {"message": "train succeed"}
 

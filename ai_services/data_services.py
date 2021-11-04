@@ -2,10 +2,11 @@ import torch
 from transformers import AutoTokenizer
 from torch.utils.data import Dataset, DataLoader
 import pytorch_lightning as pl
+from config import settings
 
 
 def tokenizer_data(text: str):
-    return AutoTokenizer.from_pretrained("roberta-base").encode_plus(
+    return AutoTokenizer.from_pretrained(settings.ai_config['model_name'], torchscript=True).encode_plus(
         text=text,
         truncation=True,
         max_length=128,
@@ -34,9 +35,9 @@ class NewsDataset(Dataset):
         input_encoding = tokenizer_data(text)
 
         return {
-            "input_ids": input_encoding['input_ids'].squeeze(),
-            "attention_mask": input_encoding['attention_mask'].squeeze(),
-            "label": torch.tensor([label], dtype=torch.float)
+            "input_ids": input_encoding['input_ids'].squeeze().clone().to(settings.device).detach(),
+            "attention_mask": input_encoding['attention_mask'].squeeze().clone().to(settings.device).detach(),
+            "label": torch.tensor([label], dtype=torch.float).to(settings.device)
         }
 
 
