@@ -1,5 +1,5 @@
 from config import settings
-from ai_services.model_services import init_trainer, create_model, load_weight, save_weight, predict
+from ai_services.model_services import init_trainer, create_model, load_weight, save_weight
 from ai_services.data_services import FakeNewsDataModule, tokenizer_data
 
 
@@ -28,8 +28,8 @@ def backup_checkpoint():
 def predict(sentence: str):
     token = tokenizer_data(sentence)
     result = settings.model(
-        input_ids=token["input_ids"],
-        attention_mask=token["attention_mask"])
+        input_ids=token["input_ids"].to(settings.device),
+        attention_mask=token["attention_mask"].to(settings.device))
     return{
         "status": True if result.item() > settings.threshold else False,
         "percent": result.item()

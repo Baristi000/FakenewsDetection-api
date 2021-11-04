@@ -109,14 +109,6 @@ def save_weight():
     settings.trainer.save_checkpoint(settings.ckpt_save_dir)
 
 
-def predict(model, text: str):
-    token = tokenizer_data(text)
-    input_ids = token['input_ids'].to(settings.device)
-    attention_mask = token['attention_mask'].to(settings.device)
-    result = model(input_ids=input_ids, attention_mask=attention_mask)
-    return result
-
-
 def init_trainer():
     settings.device = torch.device(
         "cuda" if torch.cuda.is_available() else "cpu")
