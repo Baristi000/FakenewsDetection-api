@@ -6,4 +6,4 @@ scikit-learn==1.0.1
 nest_asyncio==1.5.1
 pyngrok==5.1.0
 setuptools==58.4.0
-torch==1.10.0+cu113  -f https://download.pytorch.org/whl/cu113/torch_stable.html
+https://download.pytorch.org/whl/cu113/torch-1.10.0%2Bcu113-cp38-cp38-linux_x86_64.whl
