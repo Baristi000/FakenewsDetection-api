@@ -28,8 +28,10 @@ def backup_checkpoint():
 def predict(sentence: str):
     token = tokenizer_data(sentence)
     result = settings.model(
-        input_ids=token["input_ids"].to(settings.device),
-        attention_mask=token["attention_mask"].to(settings.device))
+        input_ids=token["input_ids"].clone(
+        ).to(settings.device).detach(),
+        attention_mask=token["attention_mask"].clone(
+        ).to(settings.device).detach())
     return{
         "status": True if result.item() > settings.threshold else False,
         "percent": result.item()
