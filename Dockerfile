@@ -4,7 +4,7 @@ COPY . /.
 
 WORKDIR /
 
-RUN pip install -r r.txt --upgrade pip &&\
+RUN pip install -r requirements/r.txt --upgrade pip &&\
     mkdir ai_services/checkpoints
 
 CMD ["python", "main.py"]
