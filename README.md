@@ -11,7 +11,7 @@
 ```bash
 git clone https://github.com/Baristi000/FakenewsDetection-api.git && \
     cd FakenewsDetection-api && \
-    pip install -r r.txt
+    pip install -r requirements/r.txt
 ```
 
 ## Run api:
