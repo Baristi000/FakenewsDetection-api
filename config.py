@@ -14,7 +14,7 @@ class Setting:
         "precision": 32,
         "epochs": 10,
     }
-    threshold = 0.5
+    threshold = 0.75
     trainer = None
     model = None
     ckpt_save_dir = "ai_services/checkpoints/current.ckpt"
