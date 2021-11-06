@@ -12,7 +12,7 @@ class Setting:
         "average": "macro",
         "lr": 2e-5,
         "precision": 32,
-        "epochs": 1,
+        "epochs": 10,
     }
     threshold = 0.5
     trainer = None
