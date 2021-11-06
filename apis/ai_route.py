@@ -14,10 +14,10 @@ response = ResponseDto()
     # responses=exampleResponse.post_test_crawler
 )
 def trainer(data: list = Body(..., embed=True)):
-    try:
-        return response.success(train(data))
-    except:
-       return response.bad_request("train error")
+    # try:
+    return response.success(train(data))
+    # except:
+    #    return response.bad_request("train error")
 
 
 @router.get(
@@ -31,7 +31,7 @@ def checkpoint():
     "/predict",
     description="Detect if data is true  or not")
 def predicter(sentence: str = Body(..., embed=True)):
-    try:
-        return response.success(predict(sentence))
-    except:
-        return response.bad_request("predict error")
+    # try:
+    return response.success(predict(sentence))
+    ''' except:
+        return response.bad_request("predict error") '''
