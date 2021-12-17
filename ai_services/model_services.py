@@ -101,8 +101,10 @@ def create_model():
 
 
 def load_weight(model):
-    l = torch.load(f=settings.ckpt_load_dir)
-    return model.load_state_dict(l['state_dict'])
+    l = torch.load(settings.ckpt_load_dir)
+    model.load_state_dict(l['state_dict'])
+    model.eval()
+    return model
 
 
 def save_weight():
