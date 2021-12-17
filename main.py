@@ -29,7 +29,7 @@ if __name__ == "__main__":
     torch.multiprocessing.set_start_method('spawn')
     # Tunnel
     """ conf.get_default().region = "ap"
-    ngrok.set_auth_token("22NQnjuDh48YeBpk3BE16MqlkC3_2AaufBdgTkktfjoeLGnfa")
+    ngrok.set_auth_token("22NQbE6s24xQQlAier9ASODJyKs_4TbPDyYZfz8d1iDWnoPbg")
     ngrok_tunnel = ngrok.connect(settings.port)
     print('Public URL:', ngrok_tunnel.public_url)
     nest_asyncio.apply() """

@@ -7,7 +7,7 @@ class Setting:
         "model_name": "roberta-base",
         "num_classes": 1,
         "max_len": 128,
-        "batch_size": 32,
+        "batch_size": 2,
         "num_workers": multiprocessing.cpu_count(),
         "average": "macro",
         "lr": 2e-5,
