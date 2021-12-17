@@ -27,7 +27,10 @@ def backup_checkpoint():
 
 def predict(sentence: str):
     token = tokenizer_data(sentence)
-    settings.model = settings.model.to(settings.device)
+    try:
+        settings.model = settings.model.to(settings.device)
+    except:
+        pass
     result = settings.model(
         input_ids=token["input_ids"].to(settings.device),
         attention_mask=token["attention_mask"].to(settings.device))
