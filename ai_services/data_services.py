@@ -13,7 +13,7 @@ def tokenizer_data(text: str):
         return_tensors="pt",
         return_attention_mask=True,
         padding="max_length",
-    )
+    ).to(settings.device)
 
 
 class NewsDataset(Dataset):
@@ -35,8 +35,8 @@ class NewsDataset(Dataset):
         input_encoding = tokenizer_data(text)
 
         return {
-            "input_ids": input_encoding['input_ids'].squeeze().clone().to(settings.device).detach(),
-            "attention_mask": input_encoding['attention_mask'].squeeze().clone().to(settings.device).detach(),
+            "input_ids": input_encoding['input_ids'].squeeze().to(settings.device),
+            "attention_mask": input_encoding['attention_mask'].squeeze().to(settings.device),
             "label": torch.tensor([label], dtype=torch.float).to(settings.device)
         }
 
